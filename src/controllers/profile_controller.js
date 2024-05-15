@@ -1,22 +1,31 @@
-import Post from '../models/Post';
+import Profile from '../models/Profile';
 
-export async function createPost(postFields) {
-  const post = new Post();
-  post.title = postFields.title;
-  post.tags = postFields.tags.split(', ');
-  post.content = postFields.content;
-  post.coverUrl = postFields.coverUrl;
+export async function createProfile(Fields) {
+  const profile = new Profile();
+  profile.name = Fields.name;
+  profile.followers = Fields.followers;
+  profile.following = Fields.following;
+  profile.highlights = Fields.highlights;
 
   try {
-    const savedPost = await post.save();
-    return savedPost;
+    const savedProfile = await profile.save();
+    return savedProfile;
   } catch (error) {
     console.log(error);
     throw new Error(`create post error: ${error}`);
   }
 }
 
-export async function getPosts() {
+export async function deleteProfile(id) {
+  try {
+    await Profile.findByIdAndDelete(id);
+  } catch (error) {
+    console.log(error);
+    throw new Error(`create post error: ${error}`);
+  }
+}
+
+/* export async function getPosts() {
   try {
     const posts = await Post.find();
     return posts;
@@ -24,21 +33,12 @@ export async function getPosts() {
     console.log(error);
     throw new Error(`create post error: ${error}`);
   }
-}
+} */
 
-export async function getPost(id) {
+/* export async function getPost(id) {
   try {
     const post = await Post.findById(id);
     return post;
-  } catch (error) {
-    console.log(error);
-    throw new Error(`create post error: ${error}`);
-  }
-}
-
-export async function deletePost(id) {
-  try {
-    await Post.findByIdAndDelete(id);
   } catch (error) {
     console.log(error);
     throw new Error(`create post error: ${error}`);
@@ -52,4 +52,4 @@ export async function updatePost(id, postFields) {
     console.log(error);
     throw new Error(`create post error: ${error}`);
   }
-}
+} */
