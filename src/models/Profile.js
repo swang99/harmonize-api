@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import Post from './Post';
+// import Post from './Post';
 
 const ProfileSchema = new Schema({
   userID: String,
@@ -7,8 +7,8 @@ const ProfileSchema = new Schema({
   email: String,
   followers: [String],
   following: [String],
-  posts: [Post],
-  highlights: [Post],
+  posts: [],
+  highlights: [],
   topTracks: [],
   topArtists: [],
   playLists: [],
