@@ -1,11 +1,17 @@
 import Profile from '../models/Profile';
 
-export async function createProfile(profileFields) {
+export async function createProfile(fields) {
   const profile = new Profile();
-  profile.name = profileFields.name;
-  profile.followers = profileFields.followers;
-  profile.following = profileFields.following;
-  profile.highlights = profileFields.highlights;
+  profile.userID = fields.userID;
+  profile.name = fields.name;
+  profile.email = fields.email;
+  profile.followers = fields.followers;
+  profile.following = fields.following;
+  profile.posts = fields.posts;
+  profile.highlights = fields.highlights;
+  profile.topTracks = fields.topTracks;
+  profile.topArtists = fields.topArtists;
+  profile.playlists = fields.playlists;
 
   try {
     const savedProfile = await profile.save();
