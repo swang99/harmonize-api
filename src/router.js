@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as Posts from './controllers/post_controller';
+// import * as Posts from './controllers/post_controller';
 import * as Profile from './controllers/profile_controller';
 
 const router = Router();
@@ -14,29 +14,39 @@ const handleCreateUser = async (req, res) => {
   }
 };
 
+const handleUpdateUser = async (req, res) => {
+  try {
+    const profileId = req.params.id;
+    const result = await Profile.updateProfile(profileId, req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 const handleDeleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
-    const result = await Posts.deletePost(userId);
+    const result = await Profile.deleteProfile(userId);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
   }
 };
 
-const handleGetUser = async (req, res) => {
+const handleGetProfile = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const result = await Profile.getUser(userId);
+    const profileId = req.params.id;
+    const result = await Profile.getProfile(profileId);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
   }
 };
 
-const handleGetUsers = async (req, res) => {
+const handleGetProfiles = async (req, res) => {
   try {
-    const result = await Profile.getUsers();
+    const result = await Profile.getProfiles();
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -49,11 +59,12 @@ router.get('/', (req, res) => {
 });
 
 router.route('/users/')
-  .get(handleGetUsers)
+  .get(handleGetProfiles)
   .post(handleCreateUser);
 
 router.route('/users/:id')
-  .get(handleGetUser)
+  .get(handleGetProfile)
+  .put(handleUpdateUser)
   .delete(handleDeleteUser);
 
 export default router;

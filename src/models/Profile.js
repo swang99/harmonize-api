@@ -3,7 +3,6 @@ import mongoose, { Schema } from 'mongoose';
 const ProfileSchema = new Schema({
   name: String,
   email: String,
-  user_type: String,
   followers: [String],
   following: [String],
   highlights: [],
