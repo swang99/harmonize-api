@@ -34,13 +34,25 @@ const handleGetUser = async (req, res) => {
   }
 };
 
+const handleGetUsers = async (req, res) => {
+  try {
+    const result = await Profile.find();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 // ROUTES
 router.get('/', (req, res) => {
   res.json({ message: 'welcome to our blog api!' });
 });
 
+router.route('/users/')
+  .get(handleGetUsers)
+  .post(handleCreateUser);
+
 router.route('/users/:id')
-  .post(handleCreateUser)
   .get(handleGetUser)
   .delete(handleDeleteUser);
 
