@@ -12,7 +12,7 @@ export async function createProfile(Fields) {
     return savedProfile;
   } catch (error) {
     console.log(error);
-    throw new Error(`create post error: ${error}`);
+    throw new Error(`create profile error: ${error}`);
   }
 }
 
@@ -21,30 +21,30 @@ export async function deleteProfile(id) {
     await Profile.findByIdAndDelete(id);
   } catch (error) {
     console.log(error);
-    throw new Error(`create post error: ${error}`);
+    throw new Error(`delete profile error: ${error}`);
   }
 }
 
-/* export async function getPosts() {
+export async function getUsers() {
   try {
-    const posts = await Post.find();
-    return posts;
+    const users = await Profile.find();
+    return users;
   } catch (error) {
     console.log(error);
-    throw new Error(`create post error: ${error}`);
-  }
-} */
-
-/* export async function getPost(id) {
-  try {
-    const post = await Post.findById(id);
-    return post;
-  } catch (error) {
-    console.log(error);
-    throw new Error(`create post error: ${error}`);
+    throw new Error(`get users error: ${error}`);
   }
 }
 
+export async function getUser(id) {
+  try {
+    const user = await Profile.findById(id);
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw new Error(`create user error: ${error}`);
+  }
+}
+/*
 export async function updatePost(id, postFields) {
   try {
     await Post.findByIdAndUpdate(id, postFields);

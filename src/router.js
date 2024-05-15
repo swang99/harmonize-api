@@ -16,8 +16,8 @@ const handleCreateUser = async (req, res) => {
 
 const handleDeleteUser = async (req, res) => {
   try {
-    const postId = req.params.id;
-    const result = await Posts.deletePost(postId);
+    const userId = req.params.id;
+    const result = await Posts.deletePost(userId);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -26,8 +26,8 @@ const handleDeleteUser = async (req, res) => {
 
 const handleGetUser = async (req, res) => {
   try {
-    const postId = req.params.id;
-    const result = await Posts.deletePost(postId);
+    const userId = req.params.id;
+    const result = await Profile.getUser(userId);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -36,7 +36,7 @@ const handleGetUser = async (req, res) => {
 
 const handleGetUsers = async (req, res) => {
   try {
-    const result = await Profile.find();
+    const result = await Profile.getUsers();
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
