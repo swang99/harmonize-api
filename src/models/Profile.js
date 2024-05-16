@@ -11,7 +11,7 @@ const ProfileSchema = new Schema({
   highlights: [],
   topTracks: [],
   topArtists: [],
-  playLists: [],
+  playlists: [],
 }, {
   toObject: { virtuals: true },
   toJSON: { virtuals: true },

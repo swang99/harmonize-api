@@ -38,7 +38,7 @@ const handleGetProfile = async (req, res) => {
   try {
     const profileId = req.params.id;
     const result = await Profile.getProfile(profileId);
-    res.json(result);
+    res.json(result.data);
   } catch (error) {
     res.status(500).json({ error });
   }

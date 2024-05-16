@@ -51,8 +51,9 @@ export async function getProfiles() {
 }
 
 export async function getProfile(id) {
+  console.log("getProfile id: ", id);
   try {
-    const user = await Profile.findById(id);
+    const user = await Profile.find({userID: id});
     return user;
   } catch (error) {
     console.log(error);
