@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import * as Post from './controllers/post_controller';
 import * as Profile from './controllers/profile_controller';
 
 const router = Router();
@@ -8,12 +7,8 @@ const router = Router();
 // Users + Post Operations
 const handleCreateUser = async (req, res) => {
   try {
-	if (Profile.findById(req.body.userID)) {
-		return res.status(409).json({ 'message': 'Profile already exists' });
-	}
-
-    const profile = await Profile.createProfile(req.body);
-    res.status(200).json(profile);
+    const result = await Profile.createProfile(req.body);
+    return res.json(result);
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -21,47 +16,32 @@ const handleCreateUser = async (req, res) => {
 
 const handleUpdateUser = async (req, res) => {
   try {
-    const profileId = req.params.id;
-	
-	if (!Profile.findById(profileId)) {
-		return res.status(404).json({ 'message': 'Profile not found.'});
-	}
-	
-    const profile = await Profile.updateProfile(profileId, req.body);
-
-    res.json(result);
+    const userID = req.params.userID;
+    const result = await Profile.updateProfile(userID, req.body);
+    return res.json(result);
   } catch (error) {
+    return res.status(500).json({ error });
     return res.status(500).json({ error });
   }
 };
 
 const handleDeleteUser = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const profile = await Profile.deleteProfile(userId);
-
-	if (!profile) {
-		return res.status(404).json({ 'message': 'Profile not found'})
-	}
-
-    res.status(200).json({ 'message': 'Profile deleted succesfully!' })
+    const userID = req.params.userID;
+    const result = await Profile.deleteProfile(userID);
+    return res.json(result);
   } catch (error) {
-	console.error('Error deleting profile: ', error);
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 };
 
 const handleGetProfile = async (req, res) => {
   try {
-    const profileId = req.params.id;
-    const profile = await Profile.getProfile(profileId);
-
-	if (!profile) {
-		res.status(404).json({ 'message': 'Profile not found'})
-	}
-
-    res.status(200).json(profile);
+    const userID = req.params.userID;
+    const result = await Profile.getProfile(userID);
+    return res.json(result);
   } catch (error) {
+    return res.status(500).json({ error });
     return res.status(500).json({ error });
   }
 };
@@ -89,6 +69,7 @@ router.route('/users/')
   .get(handleGetProfiles)
   .post(handleCreateUser);
 
+router.route('/users/:userID')
 router.route('/users/:userID')
   .get(handleGetProfile)
   .put(handleUpdateUser)

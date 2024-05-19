@@ -1,15 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
 
-const PostSchema = new Schema({
-	spotify_url: String,
-	created: Date,
-	media_type: String,
-	author: String,
-  }, {
-	toObject: { virtuals: true },
-	toJSON: { virtuals: true },
-});
-
 const ProfileSchema = new Schema({
   userID: { type: String, required: true },
   name: { type: String, default: '' },
@@ -26,5 +16,5 @@ const ProfileSchema = new Schema({
   toJSON: { virtuals: true },
 });
 
-const ProfileModel = mongoose.model('Profile', ProfileSchema);
-export default ProfileModel;
+const Profile = mongoose.model('Profile', ProfileSchema);
+export default Profile;
