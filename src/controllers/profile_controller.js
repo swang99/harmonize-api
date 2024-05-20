@@ -33,7 +33,7 @@ export async function updateProfile(userID, updateFields) {
   }
 }
 
-export async function deleteProfile(id) {
+export async function deleteProfile(userID) {
   try {
     const profile = await Profile.findOne({userID: userID});
     await Profile.findByIdAndDelete(profile.id);
@@ -62,4 +62,3 @@ export async function getProfile(userID) {
     throw new Error(`create user error: ${error}`);
   }
 }
-// db.posts.renameCollection("users")
