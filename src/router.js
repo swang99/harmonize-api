@@ -21,7 +21,6 @@ const handleUpdateUser = async (req, res) => {
     return res.json(result);
   } catch (error) {
     return res.status(500).json({ error });
-    return res.status(500).json({ error });
   }
 };
 
