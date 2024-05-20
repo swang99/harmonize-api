@@ -60,3 +60,4 @@ export async function getProfile(id) {
     throw new Error(`create user error: ${error}`);
   }
 }
+// db.posts.renameCollection("users")

@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const PostSchema = new Schema({
-  url: String,
+  spotify_url: String,
   created: Date,
   media_type: String,
   author: String,
