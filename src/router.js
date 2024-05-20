@@ -15,7 +15,7 @@ const handleCreateUser = async (req, res) => {
     const profile = await Profile.createProfile(req.body);
     res.status(200).json(profile);
   } catch (error) {
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 };
 
@@ -26,18 +26,12 @@ const handleUpdateUser = async (req, res) => {
 	if (!Profile.findById(profileId)) {
 		return res.status(404).json({ 'message': 'Profile not found.'});
 	}
-
-	let updateFields = {}
-	if (req.body.name) updateFields['name'] = req.body.name;
-	if (req.body.email) updateFields['email'] = req.body.email;
-	if (req.body.followers) updateFields['followers'] = req.body.followers;
-	if (req.body.following) updateFields['followers'] = req.body.followers;
-
-    const profile = await Profile.updateProfile(profileId, updateFields);
+	
+    const profile = await Profile.updateProfile(profileId, req.body);
 
     res.json(result);
   } catch (error) {
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 };
 
@@ -68,7 +62,7 @@ const handleGetProfile = async (req, res) => {
 
     res.status(200).json(profile);
   } catch (error) {
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 };
 
@@ -95,7 +89,7 @@ router.route('/users/')
   .get(handleGetProfiles)
   .post(handleCreateUser);
 
-router.route('/users/:id')
+router.route('/users/:userID')
   .get(handleGetProfile)
   .put(handleUpdateUser)
   .delete(handleDeleteUser)

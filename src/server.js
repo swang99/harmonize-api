@@ -40,7 +40,7 @@ app.use('/api', apiRoutes);
 // =============================================================================
 async function startServer() {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/harmonize_db';
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/harmonize_db';
     await mongoose.connect(mongoURI);
     console.log(`Mongoose connected to: ${mongoURI}`);
 

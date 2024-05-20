@@ -7,6 +7,7 @@ export async function createProfile(fields) {
   profile.email = fields.email;
   profile.followers = fields.followers;
   profile.following = fields.following;
+  profile.photo = fields.photo;
   profile.posts = fields.posts;
   profile.highlights = fields.highlights;
   profile.topTracks = fields.topTracks;
@@ -22,9 +23,10 @@ export async function createProfile(fields) {
   }
 }
 
-export async function updateProfile(id, updateFields) {
+export async function updateProfile(userID, updateFields) {
   try {
-    await Profile.findByIdAndUpdate(id, updateFields);
+    const profile = await Profile.findOne({userID: userID});
+    await Profile.findByIdAndUpdate(profile.id, updateFields);
   } catch (error) {
     console.log(error);
     throw new Error(`create profile error: ${error}`);
@@ -33,7 +35,8 @@ export async function updateProfile(id, updateFields) {
 
 export async function deleteProfile(id) {
   try {
-    await Profile.findByIdAndDelete(id);
+    const profile = await Profile.findOne({userID: userID});
+    await Profile.findByIdAndDelete(profile.id);
   } catch (error) {
     console.log(error);
     throw new Error(`delete profile error: ${error}`);
@@ -42,19 +45,18 @@ export async function deleteProfile(id) {
 
 export async function getProfiles() {
   try {
-    const users = await Profile.find();
-    return users;
+    const profiles = await Profile.find();
+    return profiles;
   } catch (error) {
     console.log(error);
-    throw new Error(`get users error: ${error}`);
+    throw new Error(`get profiles error: ${error}`);
   }
 }
 
-export async function getProfile(id) {
-  console.log("getProfile id: ", id);
+export async function getProfile(userID) {
   try {
-    const user = await Profile.find({userID: id});
-    return user;
+    const profile = await Profile.findOne({userID: userID});
+    return profile;
   } catch (error) {
     console.log(error);
     throw new Error(`create user error: ${error}`);
