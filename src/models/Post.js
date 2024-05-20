@@ -5,6 +5,7 @@ const PostSchema = new Schema({
   created: Date,
   media_type: String,
   author: String,
+  createdAt: { type: Date, default: Date.now },
 }, {
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
