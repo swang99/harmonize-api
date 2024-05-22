@@ -26,6 +26,7 @@ export async function createProfile(fields) {
 export async function updateProfile(userID, updateFields) {
   try {
     const profile = await Profile.findOne({userID: userID});
+	console.log("PUT profile: ", updateFields);
     await Profile.findByIdAndUpdate(profile.id, updateFields);
   } catch (error) {
     console.log(error);

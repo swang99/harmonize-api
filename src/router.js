@@ -14,6 +14,7 @@ const handleCreateUser = async (req, res) => {
   }
 };
 
+
 const handleUpdateUser = async (req, res) => {
   try {
     const userID = req.params.userID;
@@ -67,7 +68,6 @@ router.route('/users/')
   .get(handleGetProfiles)
   .post(handleCreateUser);
 
-router.route('/users/:userID')
 router.route('/users/:userID')
   .get(handleGetProfile)
   .put(handleUpdateUser)

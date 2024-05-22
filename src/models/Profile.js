@@ -19,7 +19,7 @@ const ProfileSchema = new Schema({
   following: { type: [String], default: [] },
   photo: { type: String, default: ''},
   posts: { type: [PostSchema] , default: [] },
-  highlights: { type: [PostSchema] , default: [] },
+  highlights: { type: Array , default: [] },
   topTracks: { type: Array, default: [] },
   topArtists: { type: Array, default: [] },
   playlists: { type: Array, default: [] },
