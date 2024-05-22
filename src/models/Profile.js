@@ -18,7 +18,7 @@ const ProfileSchema = new Schema({
   followers: { type: [String], default: [] }, 
   following: { type: [String], default: [] },
   photo: { type: String, default: ''},
-  posts: { type: [PostSchema] , default: [] },
+  posts: { type: Array , default: [] },
   highlights: { type: Array , default: [] },
   topTracks: { type: Array, default: [] },
   topArtists: { type: Array, default: [] },
