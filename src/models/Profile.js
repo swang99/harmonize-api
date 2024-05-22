@@ -28,5 +28,7 @@ const ProfileSchema = new Schema({
   toJSON: { virtuals: true },
 });
 
+ProfileSchema.index({ userID: 'text', name: 'text' });
+
 const Profile = mongoose.model('Profile', ProfileSchema);
 export default Profile;
