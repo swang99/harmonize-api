@@ -63,3 +63,21 @@ export async function getProfile(userID) {
     throw new Error(`create user error: ${error}`);
   }
 }
+
+export async function searchProfiles(query) {
+  const splitQuery = query.split(' ');
+  const regex = splitQuery.map((searchTerm) => { return new RegExp(searchTerm, 'i'); });
+
+  const posts = await Post.find({
+    $and: regex.map((r) => {
+      return {
+        $or: [
+          { name: { $regex: r } },
+          { userID: { $regex: r } },
+        ],
+      };
+    }),
+  })
+
+  return posts;
+}

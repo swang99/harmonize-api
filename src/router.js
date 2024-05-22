@@ -46,9 +46,9 @@ const handleGetProfile = async (req, res) => {
 };
 
 const handleGetProfiles = async (req, res) => {
-  if (req.query.search) {
+  if (req.query.filter) {
     try {
-      const profiles = await Profile.searchProfiles(req.query.search);
+      const profiles = await Profile.searchProfiles(req.query.filter);
       return res.json(profiles);
     } catch (error) {
       return res.status(500).json({ error });
