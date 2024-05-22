@@ -68,7 +68,7 @@ export async function searchProfiles(query) {
   const splitQuery = query.split(' ');
   const regex = splitQuery.map((searchTerm) => { return new RegExp(searchTerm, 'i'); });
 
-  const posts = await Post.find({
+  const posts = await Profile.find({
     $and: regex.map((r) => {
       return {
         $or: [
