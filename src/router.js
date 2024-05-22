@@ -67,6 +67,16 @@ const handleGetProfiles = async (req, res) => {
   }
 };
 
+const handleGetFeed = async (req, res) => {
+  try {
+    const userID = req.params.userID;
+    const feed = await Profile.loadFeed(userID);
+    return res.json(feed);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
 // ROUTES
 router.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Harmonize API!' });
@@ -80,5 +90,8 @@ router.route('/users/:userID')
   .get(handleGetProfile)
   .put(handleUpdateUser)
   .delete(handleDeleteUser)
+
+router.route('/users/:userID/feed')
+  .get(handleGetFeed);
 
 export default router;

@@ -67,17 +67,41 @@ export async function getProfile(userID) {
 export async function searchProfiles(query) {
   const splitQuery = query.split(' ');
   const regex = splitQuery.map((searchTerm) => { return new RegExp(searchTerm, 'i'); });
+  try {
+    const posts = await Profile.find({
+      $and: regex.map((r) => {
+        return {
+          $or: [
+            { name: { $regex: r } },
+            { userID: { $regex: r } },
+          ],
+        };
+      }),
+    })
+    return posts;
+  } catch (error) {
+    console.log(error);
+    throw new Error(`search profiles error: ${error}`);
+  }
+}
 
-  const posts = await Profile.find({
-    $and: regex.map((r) => {
-      return {
-        $or: [
-          { name: { $regex: r } },
-          { userID: { $regex: r } },
-        ],
-      };
-    }),
-  })
-
-  return posts;
+export async function getFeed(userID) {
+  try {
+    const profile = await getProfile(userID);
+    const { following } = profile;
+    const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
+    const posts = followeeProfiles.flatMap((followeeProfile) => followeeProfile.posts);
+    const uniquePosts = [];
+    const uniquePostIDs = new Set();
+    for (const post of posts) {
+      if (!uniquePostIDs.has(post.id)) {
+        uniquePosts.push(post);
+        uniquePostIDs.add(post.id);
+      }
+    }
+    return uniquePosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  } catch (error) {
+    console.log(error);
+    throw new Error(`get feed error: ${error}`);
+  }
 }
