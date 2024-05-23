@@ -70,7 +70,7 @@ const handleGetProfiles = async (req, res) => {
 const handleGetFeed = async (req, res) => {
   try {
     const userID = req.params.userID;
-    const feed = await Profile.loadFeed(userID);
+    const feed = await Profile.getFeed(userID);
     return res.json(feed);
   } catch (error) {
     return res.status(500).json({ error });
