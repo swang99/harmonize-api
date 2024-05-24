@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const PostSchema = new Schema({
   id: { type: String },
-  mediaType: { type: String},
+  type: { type: String},
   description: { type: String},
   comments: { type: [String], default: [] },
   likes: { type: [String], default: [] },
