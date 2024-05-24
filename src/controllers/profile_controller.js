@@ -90,7 +90,15 @@ export async function getFeed(userID) {
     const profile = await getProfile(userID);
     const { following } = profile;
     const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
-    const posts = followeeProfiles.flatMap((followeeProfile) => followeeProfile.posts);
+    const posts = followeeProfiles.flatMap((followeeProfile) => {
+      return followeeProfile.posts.map((post) => {
+      return {
+        ...post,
+        name: followeeProfile.name,
+        photo: followeeProfile.photo
+      };
+      });
+    });
     const uniquePosts = [];
     const uniquePostIDs = new Set();
     for (const post of posts) {
