@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const PostSchema = new Schema({
-  id: { type: String },
+  trackID: { type: String },
   mediaType: { type: String},
   description: { type: String},
   comments: { type: [String], default: [] },
