@@ -1,10 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
 
 const PostSchema = new Schema({
-  spotify_url: String,
-  created: Date,
-  media_type: String,
-  author: String,
+  trackID: { type: String },
+  mediaType: { type: String},
+  description: { type: String},
+  comments: { type: [String], default: [] },
+  likes: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
 }, {
   toObject: { virtuals: true },
@@ -18,7 +19,7 @@ const ProfileSchema = new Schema({
   followers: { type: [String], default: [] }, 
   following: { type: [String], default: [] },
   photo: { type: String, default: ''},
-  posts: { type: Array , default: [] },
+  posts: { type: [PostSchema] , default: [] },
   highlights: { type: Array , default: [] },
   topTracks: { type: Array, default: [] },
   topArtists: { type: Array, default: [] },
