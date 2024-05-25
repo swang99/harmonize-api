@@ -95,7 +95,8 @@ export async function getFeed(userID) {
       return {
         ...post,
         name: followeeProfile.name,
-        photo: followeeProfile.photo
+        photo: followeeProfile.photo,
+        authorID: followeeProfile.userID,
       };
       });
     });
