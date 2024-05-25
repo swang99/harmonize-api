@@ -1,10 +1,19 @@
 import mongoose, { Schema } from 'mongoose';
 
+const CommentSchema = new Schema({
+	author: { type: String },
+	comment: { type: String },
+	createdAt: { type: Date, default: Date.now },
+  }, {
+	toObject: { virtuals: true },
+	toJSON: { virtuals: true },
+});
+
 const PostSchema = new Schema({
   id: { type: String },
   type: { type: String},
   description: { type: String},
-  comments: { type: [String], default: [] },
+  comments: { type: [CommentSchema], default: [] },
   likes: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
 }, {
