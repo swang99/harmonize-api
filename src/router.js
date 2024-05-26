@@ -80,7 +80,6 @@ const handleGetFeed = async (req, res) => {
 const handleGetLikedPosts = async (req, res) => {
   try {
     const userID = req.params.userID;
-    console.log('Getting liked posts for:', userID);
     const likedPosts = await Profile.getLikedPosts(userID);
     return res.json(likedPosts);
   } catch (error) {
