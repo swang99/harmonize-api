@@ -100,15 +100,7 @@ export async function getFeed(userID) {
       };
       });
     });
-    const uniquePosts = [];
-    const uniquePostIDs = new Set();
-    for (const post of posts) {
-      if (!uniquePostIDs.has(post.id)) {
-        uniquePosts.push(post);
-        uniquePostIDs.add(post.id);
-      }
-    }
-    return uniquePosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   } catch (error) {
     console.log(error);
     throw new Error(`get feed error: ${error}`);
