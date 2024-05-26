@@ -113,6 +113,7 @@ export async function getLikedPosts(userID) {
     // Loop through all posts in user's following profiles, if user's liked has that post ID, add to likedPosts (with author info)
     const { following } = profile;
     const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
+    console.log('Followee profiles for Liked Posts:', followeeProfiles);
     const posts = followeeProfiles.flatMap((followeeProfile) => {
       return followeeProfile.posts.map((post) => {
         return {
@@ -124,6 +125,7 @@ export async function getLikedPosts(userID) {
       });
     });
     const likedPosts = posts.filter((post) => profile.liked.includes(post.id));
+    console.log('Liked Posts:', likedPosts);
     return likedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   } catch (error) {
     console.log(error);
