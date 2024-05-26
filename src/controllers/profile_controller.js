@@ -124,8 +124,8 @@ export async function getLikedPosts(userID) {
         };
       });
     });
-    const likedPosts = posts.filter((post) => profile.liked.includes(post.id));
-    console.log('Liked Posts:', likedPosts);
+    console.log('Posts:', posts);
+    const likedPosts = posts.filter((post) => profile._doc.liked.includes(post.id));
     return likedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   } catch (error) {
     console.log(error);
