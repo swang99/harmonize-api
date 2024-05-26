@@ -106,3 +106,27 @@ export async function getFeed(userID) {
     throw new Error(`get feed error: ${error}`);
   }
 }
+
+export async function getLikedPosts(userID) {
+  try {
+    const profile = await getProfile(userID);
+    // Loop through all posts in user's following profiles, if user's liked has that post ID, add to likedPosts (with author info)
+    const { following } = profile;
+    const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
+    const posts = followeeProfiles.flatMap((followeeProfile) => {
+      return followeeProfile.posts.map((post) => {
+        return {
+          ...post,
+          name: followeeProfile.name,
+          photo: followeeProfile.photo,
+          authorID: followeeProfile.userID,
+        };
+      });
+    });
+    const likedPosts = posts.filter((post) => profile.liked.includes(post.id));
+    return likedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  } catch (error) {
+    console.log(error);
+    throw new Error(`get liked posts error: ${error}`);
+  }
+}

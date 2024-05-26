@@ -77,6 +77,16 @@ const handleGetFeed = async (req, res) => {
   }
 }
 
+const handleGetLikedPosts = async (req, res) => {
+  try {
+    const userID = req.params.userID;
+    const likedPosts = await Profile.getLikedPosts(userID);
+    return res.json(likedPosts);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
 // ROUTES
 router.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Harmonize API!' });
@@ -94,4 +104,7 @@ router.route('/users/:userID')
 router.route('/users/:userID/feed')
   .get(handleGetFeed);
 
+router.route('/users/:userID/liked')
+  .get(handleGetLikedPosts);
+  
 export default router;
