@@ -16,6 +16,9 @@ const PostSchema = new Schema({
   comments: { type: [CommentSchema], default: [] },
   likes: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
+  songName: { type: String, default: '' },
+  artists: { type: String, default: '' },
+  imageURL: { type: String, default: '' },
 }, {
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
