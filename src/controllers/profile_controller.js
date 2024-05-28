@@ -92,15 +92,15 @@ export async function getFeed(userID) {
     const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
     const posts = followeeProfiles.flatMap((followeeProfile) => {
       return followeeProfile.posts.map((post) => {
-      return {
-        ...post,
-        name: followeeProfile.name,
-        photo: followeeProfile.photo,
-        authorID: followeeProfile.userID,
-      };
+        return {
+          ...post,
+          name: followeeProfile.name,
+          photo: followeeProfile.photo,
+          authorID: followeeProfile.userID,
+        };
       });
     });
-    return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return posts.sort({ createdAt: -1 });
   } catch (error) {
     console.log(error);
     throw new Error(`get feed error: ${error}`);
