@@ -36,6 +36,8 @@ const ProfileSchema = new Schema({
   topTracks: { type: Array, default: [] },
   topArtists: { type: Array, default: [] },
   playlists: { type: Array, default: [] },
+  recommendations: { type: Array, default: [] },
+  recommendationsLastUpdated: { type: Date, default: Date.now() - (24 * 60 * 60 * 1000) },
 }, {
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
