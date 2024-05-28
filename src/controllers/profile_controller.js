@@ -100,7 +100,7 @@ export async function getFeed(userID) {
         };
       });
     });
-    return posts.sort({ createdAt: -1 });
+    return posts.sort((a, b) => new Date(b._doc.createdAt) - new Date(a._doc.createdAt));
   } catch (error) {
     console.log(error);
     throw new Error(`get feed error: ${error}`);
