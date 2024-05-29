@@ -142,7 +142,7 @@ export async function getFriendActivity(userID) {
       return followeeProfile.topTracks.slice(0, 5).map((track) => {
         return {
           ...track,
-          name: followeeProfile.name,
+          username: followeeProfile.name,
           photo: followeeProfile.photo,
           userID: followeeProfile.userID,
         };
