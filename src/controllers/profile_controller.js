@@ -142,7 +142,7 @@ export async function getFriendActivity(userID) {
           ...post,
           name: followeeProfile.name,
           photo: followeeProfile.photo,
-          authorID: followeeProfile.userID,
+          userID: followeeProfile.userID,
         };
       });
     });
