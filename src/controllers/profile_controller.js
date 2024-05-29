@@ -136,8 +136,10 @@ export async function getFriendActivity(userID) {
     const profile = await getProfile(userID);
     const { following } = profile;
     const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
+    // Only get top 5 tracks from each followee
+
     const tracks = followeeProfiles.flatMap((followeeProfile) => {
-      return followeeProfile.topTracks.map((track) => {
+      return followeeProfile.topTracks.slice(0, 5).map((track) => {
         return {
           ...track,
           name: followeeProfile.name,
