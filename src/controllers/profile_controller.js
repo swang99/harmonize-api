@@ -124,9 +124,31 @@ export async function getLikedPosts(userID) {
       });
     });
     const likedPosts = posts.filter((post) => post._doc.likes.includes(userID));
-    return likedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return likedPosts.sort((a, b) => new Date(b._doc.createdAt) - new Date(a._doc.createdAt));
   } catch (error) {
     console.log(error);
     throw new Error(`get liked posts error: ${error}`);
+  }
+}
+
+export async function getFriendActivity(userID) {
+  try {
+    const profile = await getProfile(userID);
+    const { following } = profile;
+    const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
+    const tracks = followeeProfiles.flatMap((followeeProfile) => {
+      return followeeProfile.topTracks.map((post) => {
+        return {
+          ...post,
+          name: followeeProfile.name,
+          photo: followeeProfile.photo,
+          authorID: followeeProfile.userID,
+        };
+      });
+    });
+    return tracks;
+  } catch (error) {
+    console.log(error);
+    throw new Error(`get friend activity error: ${error}`);
   }
 }
