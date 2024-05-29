@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const CommentSchema = new Schema({
 	author: { type: String },
+	name: { type: String },
 	comment: { type: String },
 	createdAt: { type: Date, default: Date.now },
   }, {
