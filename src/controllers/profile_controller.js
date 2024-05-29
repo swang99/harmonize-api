@@ -137,9 +137,9 @@ export async function getFriendActivity(userID) {
     const { following } = profile;
     const followeeProfiles = await Promise.all(following.map((followeeID) => getProfile(followeeID)));
     const tracks = followeeProfiles.flatMap((followeeProfile) => {
-      return followeeProfile.topTracks.map((post) => {
+      return followeeProfile.topTracks.map((track) => {
         return {
-          ...post,
+          ...track,
           name: followeeProfile.name,
           photo: followeeProfile.photo,
           userID: followeeProfile.userID,
