@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
 import morgan from 'morgan';
@@ -7,6 +8,10 @@ import apiRoutes from './router';
 
 // initialize
 const app = express();
+
+// incerase size limits on payload
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // enable/disable cross origin resource sharing if necessary
 app.use(cors());
