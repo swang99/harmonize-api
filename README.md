@@ -4,7 +4,9 @@
 Welcome to Harmonize, the ultimate social experience for music lovers! Sign in with your Spotify account and dive into a vibrant community of music enthusiasts. Follow your friends to discover the songs they’re loving, or share your own favorite tracks with personalized posts. Connect, share, and celebrate music together with Harmonize!
 
 ## Features
-![Harmonize Landing](src/img/Spotify%20Sharing%20Landing.mov)
+<video width="640" height="480" controls>
+  <source src="src/img/Spotify Sharing Landing.mov" type="video/mp4">
+</video>
 
 ## Architecture
 - [Frontend](https://harmonize-client.onrender.com) - [(Repo)](https://github.com/dartmouth-cs52-24s/project-client-spotify-sharing):
